@@ -1,13 +1,9 @@
-// File: app/add-tool/page.tsx
-
 'use client';
-
-import { getAuth, signInAnonymously } from "firebase/auth";
 import { useEffect } from "react";
 
 import { useState } from "react";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/app/lib/firebase";
 
 export default function AddTool() {
@@ -50,7 +46,7 @@ export default function AddTool() {
         imageUrl = await getDownloadURL(snapshot.ref);
       }
 
-      const docRef = await addDoc(collection(db, "tools"), {
+      await addDoc(collection(db, "tools"), {
         name: toolName,
         category,
         price: Number(price),
